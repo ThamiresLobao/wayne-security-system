@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+<title>Wayne Security Dashboard</title>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<style>
+
+body{
+margin:0;
+font-family:Arial;
+background:#0f0f0f;
+color:white;
+}
+
+/* MENU LATERAL */
+
+.sidebar{
+width:220px;
+height:100vh;
+background:#1a1a1a;
+position:fixed;
+padding-top:30px;
+}
+
+.sidebar h2{
+color:gold;
+text-align:center;
+}
+
+.sidebar a{
+display:block;
+color:white;
+padding:15px;
+text-decoration:none;
+}
+
+.sidebar a:hover{
+background:#333;
+}
+
+/* CONTEÚDO */
+
+.main{
+margin-left:220px;
+padding:30px;
+}
+
+.cards{
+display:flex;
+gap:20px;
+margin-bottom:30px;
+}
+
+.card{
+flex:1;
+background:#1e1e1e;
+padding:20px;
+border-radius:10px;
+text-align:center;
+}
+
+.card h2{
+color:gold;
+margin:0;
+}
+
+canvas{
+background:#1e1e1e;
+padding:20px;
+border-radius:10px;
+}
+
+/* TABELA */
+
+table{
+width:100%;
+margin-top:30px;
+border-collapse:collapse;
+}
+
+th,td{
+padding:12px;
+border-bottom:1px solid #333;
+}
+
+th{
+color:gold;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<!-- MENU LATERAL -->
+
+<div class="sidebar">
+
+<h2>🦇 Wayne</h2>
+
+<a href="/dashboard">Dashboard</a>
+<a href="/recursos">Recursos</a>
+<a href="/usuarios">Funcionários</a>
+<a href="/logs">Logs de Segurança</a>
+<a href="/logout">Sair</a>
+
+</div>
+
+
+<!-- CONTEÚDO -->
+
+<div class="main">
+
+<h1>Dashboard de Segurança</h1>
+
+<p>Bem vindo, {{usuario}}</p>
+
+<div class="cards">
+
+<div class="card">
+<h2>{{total_recursos}}</h2>
+<p>Recursos Totais</p>
+</div>
+
+<div class="card">
+<h2>{{total_users}}</h2>
+<p>Funcionários</p>
+</div>
+
+<div class="card">
+<h2>{{ativos}}</h2>
+<p>Ativos</p>
+</div>
+
+<div class="card">
+<h2>{{manutencao}}</h2>
+<p>Manutenção</p>
+</div>
+
+<div class="card">
+<h2>{{inativos}}</h2>
+<p>Inativos</p>
+</div>
+
+</div>
+
+<h2>Status dos Recursos</h2>
+
+<canvas id="grafico"></canvas>
+
+<script>
+
+const ctx = document.getElementById('grafico');
+
+new Chart(ctx, {
+
+type: 'bar',
+
+data: {
+
+labels: ['Ativos','Manutenção','Inativos'],
+
+datasets: [{
+
+label: 'Recursos',
+
+data: [
+{{ativos}},
+{{manutencao}},
+{{inativos}}
+]
+
+}]
+
+}
+
+});
+
+</script>
+
+
+<h2>Últimas Atividades</h2>
+
+<table>
+
+<tr>
+<th>Usuário</th>
+<th>Ação</th>
+<th>Data</th>
+</tr>
+
+{% for log in logs %}
+
+<tr>
+
+<td>{{log["usuario"]}}</td>
+<td>{{log["acao"]}}</td>
+<td>{{log["data"]}}</td>
+
+</tr>
+
+{% endfor %}
+
+</table>
+
+</div>
+
+</body>
+</html>

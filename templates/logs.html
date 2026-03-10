@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+<title>Logs de Segurança</title>
+
+<style>
+
+body{
+font-family:Arial;
+background:#111;
+color:white;
+padding:30px;
+}
+
+table{
+width:100%;
+border-collapse:collapse;
+}
+
+th,td{
+padding:12px;
+border-bottom:1px solid #333;
+}
+
+th{
+color:gold;
+}
+
+a{
+color:gold;
+text-decoration:none;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<h1>Logs de Segurança</h1>
+
+<a href="/dashboard">⬅ Voltar ao Dashboard</a>
+
+<br><br>
+
+<table>
+
+<tr>
+<th>Usuário</th>
+<th>Ação</th>
+<th>Data</th>
+</tr>
+
+{% for log in logs %}
+
+<tr>
+
+<td>{{log["usuario"]}}</td>
+<td>{{log["acao"]}}</td>
+<td>{{log["data"]}}</td>
+
+</tr>
+
+{% endfor %}
+
+</table>
+
+</body>
+</html>

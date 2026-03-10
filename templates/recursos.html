@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Recursos - Wayne Industries</title>
+
+<style>
+
+body{
+    margin:0;
+    font-family:Arial;
+    background:#0f0f0f;
+    color:white;
+}
+
+.container{
+    width:800px;
+    margin:50px auto;
+}
+
+h1{
+    color:gold;
+}
+
+.card{
+    background:#1e1e1e;
+    padding:20px;
+    border-radius:10px;
+    margin-bottom:30px;
+}
+
+input,select{
+    padding:10px;
+    margin:5px;
+    border:none;
+    border-radius:5px;
+}
+
+button{
+    padding:10px;
+    border:none;
+    border-radius:5px;
+    cursor:pointer;
+}
+
+.adicionar{
+    background:gold;
+}
+
+.voltar{
+    background:#444;
+    color:white;
+}
+
+table{
+    width:100%;
+    border-collapse:collapse;
+    margin-top:20px;
+}
+
+th,td{
+    padding:12px;
+    border-bottom:1px solid #333;
+}
+
+th{
+    color:gold;
+}
+
+.acoes a{
+    color:gold;
+    margin-right:10px;
+    text-decoration:none;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="container">
+
+<h1>Recursos das Indústrias Wayne</h1>
+
+<div class="card">
+
+<form action="/add_recurso" method="POST">
+
+<input type="text" name="nome" placeholder="Nome do recurso">
+
+<select name="tipo">
+<option value="Servidor">Servidor</option>
+<option value="Câmera">Câmera</option>
+<option value="Sistema">Sistema</option>
+</select>
+
+<select name="status">
+<option value="Ativo">Ativo</option>
+<option value="Manutenção">Manutenção</option>
+<option value="Inativo">Inativo</option>
+</select>
+
+<button class="adicionar">Adicionar Recurso</button>
+
+</form>
+
+</div>
+
+<table>
+
+<tr>
+<th>ID</th>
+<th>Nome</th>
+<th>Tipo</th>
+<th>Status</th>
+<th>Ações</th>
+</tr>
+
+{% for recurso in recursos %}
+
+<tr>
+
+<td>{{recurso.id}}</td>
+<td>{{recurso.nome}}</td>
+<td>{{recurso.tipo}}</td>
+<td>{{recurso.status}}</td>
+
+<td class="acoes">
+
+<a href="/editar_recurso/{{recurso.id}}">Editar</a>
+
+<a href="/delete_recurso/{{recurso.id}}">Excluir</a>
+
+</td>
+
+</tr>
+
+{% endfor %}
+
+</table>
+
+<br>
+
+<a href="/dashboard">
+<button class="voltar">⬅ Voltar ao Menu Principal</button>
+</a>
+
+</div>
+
+</body>
+</html>
